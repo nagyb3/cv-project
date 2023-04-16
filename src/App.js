@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import GeneralInfo from "./components/GeneralInfo";
+import EducationalExperience from "./components/EducationalExperience";
+import PracticalExperience from "./components/PracticalExperience";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [inputValues, setInputValues] = React.useState(
+        {}
+    );
+
+    function handleChange() {
+
+    }
+
+    function handleSubmit() {
+
+    }
+
+    return (
+        <div>
+            <h1>Cv site</h1>
+            <form onSubmit={handleSubmit}>
+                <GeneralInfo onChange={handleChange()} />
+                <EducationalExperience onChange={handleChange()}/>
+                <PracticalExperience onChange={handleChange()}/>
+                <button>SUBMIT</button>
+            </form>
+        </div>
+    );
 }
 
 export default App;
