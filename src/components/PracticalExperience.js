@@ -12,7 +12,8 @@ export default function PracticalExperience(props) {
         <div className="practical-experience">
             <h2>Practical experience</h2>
             {props.formIsShown ?
-                <form onChange={props.handleChange} onSubmit={props.handleSubmit}>
+                <form id="practicalForm"
+                    onChange={props.handleChange} onSubmit={props.handleSubmit}>
                     <div>
                         <label htmlFor="company-name">company name</label>
                         <input type="text" name="companyName" id="company-name"/>

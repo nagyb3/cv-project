@@ -12,7 +12,8 @@ export default function GeneralInfo(props) {
         <div className="general-info">
             <h2>General info:</h2>
             {props.formIsShown ?
-                <form onChange={props.handleChange} onSubmit={props.handleSubmit}>
+                <form id="generalInfoForm"
+                      onChange={props.handleChange} onSubmit={props.handleSubmit}>
                     <div>
                         <label htmlFor="name:">name</label>
                         <input type="text" name="name" id="name" placeholder="Full Name"/>

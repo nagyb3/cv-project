@@ -13,7 +13,8 @@ export default function EducationalExperience(props) {
         <div className="educational-experience">
             <h2>Educational experience</h2>
             {props.formIsShown ?
-                <form onChange={props.handleChange} onSubmit={props.handleSubmit}>
+                <form id="educationalForm"
+                      onChange={props.handleChange} onSubmit={props.handleSubmit}>
                     <div>
                         <label htmlFor="name-of-school">name of school:</label>
                         <input type="text" name="nameOfSchool" id="name-of-school"/>

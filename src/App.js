@@ -14,16 +14,8 @@ function App() {
         companyName: "", positionTitle: "", dateFrom: "", dateTo: ""
     })
 
-    // const [EducationData, setEducationData] = React.useState({
-    //     nameOfSchool: "", titleOfStudy: "", dateOfStudy: ""
-    // })
-    //
-    // const [PracticalData, setPracticalData] = React.useState({
-    //     companyName: "", positiontTitle: "", dateFrom: "", dateTo: ""
-    // })
-
     const [formIsShown, setFormIsShown] = React.useState({
-        general: true, educational: true, practical: false
+        general: true, educational: true, practical: true
     })
 
     const [dataIsShown, setDataIsShown] = React.useState({
@@ -37,11 +29,31 @@ function App() {
             ...prevState,
             [name]: value
         }))
-        console.log(Data)
     }
 
     function handleSubmit(event) {
-        console.log(event)
+        event.preventDefault()
+        if (event.target.id === "generalInfoForm") {
+            setData(prevState => ({...prevState,
+                name: event.target[0].value,
+                email: event.target[1].value,
+                phone: event.target[2].value}))
+            setFormIsShown(prevState => ({...prevState, general: !prevState.general}))
+        } else if (event.target.id === "educationalForm") {
+            setData(prevState => ({...prevState,
+                nameOfSchool: event.target[0].value,
+                titleOfStudy: event.target[1].value,
+                dateOfStudy: event.target[2].value}))
+            setFormIsShown(prevState => ({...prevState, educational: !prevState.general}))
+        } else if (event.target.id === "practicalForm") {
+            setData(prevState => ({...prevState,
+                companyName: event.target[0].value,
+                positionTitle: event.target[1].value,
+                dateFrom: event.target[2].value,
+                dateTo: event.target[3].value
+            }))
+            setFormIsShown(prevState => ({...prevState, practical: !prevState.general}))
+        }
     }
 
     function toggleShowForm(sectionName) {
@@ -52,7 +64,6 @@ function App() {
 
     function toggleShowData(sectionName) {
         setDataIsShown(prevState => ({...prevState, [sectionName]: !prevState.sectionName}))
-        console.log(dataIsShown)
     }
 
     return (
