@@ -22,8 +22,12 @@ function App() {
     //     companyName: "", positiontTitle: "", dateFrom: "", dateTo: ""
     // })
 
-    const [isShown, setIsShown] = React.useState({
-        general: true, educational: true, practical: true
+    const [formIsShown, setFormIsShown] = React.useState({
+        general: true, educational: true, practical: false
+    })
+
+    const [dataIsShown, setDataIsShown] = React.useState({
+        general: false, educational: false, practical: false
     })
 
     function handleChange(event) {
@@ -40,21 +44,23 @@ function App() {
         console.log(event)
     }
 
-    // function showForm(sectionName) {
-    //     setIsShown(prevState => ({
-    //         ...prevState, sectionName: !prevState.sectionName
-    //     }))
-    // }
+    function toggleShowForm(sectionName) {
+        setFormIsShown(prevState => ({
+            ...prevState, sectionName: !prevState.sectionName
+        }))
+    }
+
+    function toggleShowData(sectionName) {
+        setDataIsShown(prevState => ({...prevState, [sectionName]: !prevState.sectionName}))
+        console.log(dataIsShown)
+    }
 
     return (
         <div>
             <h1>Cv site</h1>
-            {/*<form onSubmit={handleSubmit}>*/}
-                <GeneralInfo /*showForm={showForm}*/ formIsShown={isShown.general} handleChange={handleChange} handleSubmit={handleSubmit}/>
-                <EducationalExperience formIsShown={isShown.educational} handleChange={handleChange} handleSubmit={handleSubmit}/>
-                <PracticalExperience formIsShown={isShown.practical} handleChange={handleChange} handleSubmit={handleSubmit}/>
-                {/*<button>SUBMIT the whole thing</button>*/}
-            {/*</form>*/}
+            <GeneralInfo setFormIsShown={setFormIsShown} formIsShown={formIsShown.general} handleChange={handleChange} handleSubmit={handleSubmit}/>
+            <EducationalExperience setFormIsShown={setFormIsShown} formIsShown={formIsShown.educational} handleChange={handleChange} handleSubmit={handleSubmit}/>
+            <PracticalExperience setFormIsShown={setFormIsShown} formIsShown={formIsShown.practical} handleChange={handleChange} handleSubmit={handleSubmit}/>
         </div>
     );
 }

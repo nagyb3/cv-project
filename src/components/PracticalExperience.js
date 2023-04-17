@@ -1,10 +1,17 @@
 import React from "react"
 
 export default function PracticalExperience(props) {
+
+    function toggle() {
+        props.setFormIsShown(prevState => ({
+            ...prevState, practical: !prevState.practical
+        }))
+    }
+
     return (
         <div className="practical-experience">
             <h2>Practical experience</h2>
-            {props.formIsShown &&
+            {props.formIsShown ?
                 <form onChange={props.handleChange} onSubmit={props.handleSubmit}>
                     <div>
                         <label htmlFor="company-name">company name</label>
@@ -23,7 +30,7 @@ export default function PracticalExperience(props) {
                         <input type="date" name="dateTo" id="date-to"/>
                     </div>
                     <button>SAVE</button>
-                </form>
+                </form> : <button onClick={toggle}>Show form</button>
             }
         </div>
     )
