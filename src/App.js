@@ -8,23 +8,53 @@ function App() {
         {}
     );
 
-    function handleChange() {
+    const [Data, setData] = React.useState({
+        name: "", email: "", phone: "",
+        nameOfSchool: "", titleOfStudy: "", dateOfStudy: "",
+        companyName: "", positionTitle: "", dateFrom: "", dateTo: ""
+    })
 
+    // const [EducationData, setEducationData] = React.useState({
+    //     nameOfSchool: "", titleOfStudy: "", dateOfStudy: ""
+    // })
+    //
+    // const [PracticalData, setPracticalData] = React.useState({
+    //     companyName: "", positiontTitle: "", dateFrom: "", dateTo: ""
+    // })
+
+    const [isShown, setIsShown] = React.useState({
+        general: true, educational: true, practical: true
+    })
+
+    function handleChange(event) {
+        event.preventDefault();
+        const {name, value} = event.target
+        setData(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+        console.log(Data)
     }
 
-    function handleSubmit() {
-
+    function handleSubmit(event) {
+        console.log(event)
     }
+
+    // function showForm(sectionName) {
+    //     setIsShown(prevState => ({
+    //         ...prevState, sectionName: !prevState.sectionName
+    //     }))
+    // }
 
     return (
         <div>
             <h1>Cv site</h1>
-            <form onSubmit={handleSubmit}>
-                <GeneralInfo onChange={handleChange()} />
-                <EducationalExperience onChange={handleChange()}/>
-                <PracticalExperience onChange={handleChange()}/>
-                <button>SUBMIT</button>
-            </form>
+            {/*<form onSubmit={handleSubmit}>*/}
+                <GeneralInfo /*showForm={showForm}*/ formIsShown={isShown.general} handleChange={handleChange} handleSubmit={handleSubmit}/>
+                <EducationalExperience formIsShown={isShown.educational} handleChange={handleChange} handleSubmit={handleSubmit}/>
+                <PracticalExperience formIsShown={isShown.practical} handleChange={handleChange} handleSubmit={handleSubmit}/>
+                {/*<button>SUBMIT the whole thing</button>*/}
+            {/*</form>*/}
         </div>
     );
 }
