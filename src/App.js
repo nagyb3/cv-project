@@ -2,13 +2,14 @@ import React from "react";
 import GeneralInfo from "./components/GeneralInfo";
 import EducationalExperience from "./components/EducationalExperience";
 import PracticalExperience from "./components/PracticalExperience";
+import "./styles/styles.css";
 
 function App() {
     const [inputValues, setInputValues] = React.useState(
         {}
     );
 
-    const [Data, setData] = React.useState({
+    const [data, setData] = React.useState({
         name: "", email: "", phone: "",
         nameOfSchool: "", titleOfStudy: "", dateOfStudy: "",
         companyName: "", positionTitle: "", dateFrom: "", dateTo: ""
@@ -39,12 +40,14 @@ function App() {
                 email: event.target[1].value,
                 phone: event.target[2].value}))
             setFormIsShown(prevState => ({...prevState, general: !prevState.general}))
+            setDataIsShown(prevState => ({...prevState, general: true}))
         } else if (event.target.id === "educationalForm") {
             setData(prevState => ({...prevState,
                 nameOfSchool: event.target[0].value,
                 titleOfStudy: event.target[1].value,
                 dateOfStudy: event.target[2].value}))
-            setFormIsShown(prevState => ({...prevState, educational: !prevState.general}))
+            setFormIsShown(prevState => ({...prevState, educational: !prevState.educational}))
+            setDataIsShown(prevState => ({...prevState, educational: true}))
         } else if (event.target.id === "practicalForm") {
             setData(prevState => ({...prevState,
                 companyName: event.target[0].value,
@@ -52,7 +55,8 @@ function App() {
                 dateFrom: event.target[2].value,
                 dateTo: event.target[3].value
             }))
-            setFormIsShown(prevState => ({...prevState, practical: !prevState.general}))
+            setFormIsShown(prevState => ({...prevState, practical: !prevState.practical}))
+            setDataIsShown(prevState => ({...prevState, practical: true}))
         }
     }
 
@@ -69,9 +73,24 @@ function App() {
     return (
         <div>
             <h1>Cv site</h1>
-            <GeneralInfo setFormIsShown={setFormIsShown} formIsShown={formIsShown.general} handleChange={handleChange} handleSubmit={handleSubmit}/>
-            <EducationalExperience setFormIsShown={setFormIsShown} formIsShown={formIsShown.educational} handleChange={handleChange} handleSubmit={handleSubmit}/>
-            <PracticalExperience setFormIsShown={setFormIsShown} formIsShown={formIsShown.practical} handleChange={handleChange} handleSubmit={handleSubmit}/>
+            <GeneralInfo data={data}
+                dataIsShown={dataIsShown}
+                setFormIsShown={setFormIsShown}
+                formIsShown={formIsShown.general}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}/>
+            <EducationalExperience data={data}
+                dataIsShown={dataIsShown}
+                setFormIsShown={setFormIsShown}
+                formIsShown={formIsShown.educational}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}/>
+            <PracticalExperience data={data}
+                dataIsShown={dataIsShown}
+                setFormIsShown={setFormIsShown}
+                formIsShown={formIsShown.practical}
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}/>
         </div>
     );
 }
